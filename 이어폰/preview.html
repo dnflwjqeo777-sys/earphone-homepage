@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UPIc — 미리보기 (npm 불필요)</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body, #root { margin: 0; min-height: 100%; }
+  </style>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" data-presets="react">
+const menuItems = [
+  ["company", "회사소개"],
+  ["products", "상품소개"],
+  ["technology", "기술력"],
+  ["location", "오시는길"],
+];
+
+
+const productCards = [
+  [
+    "UPIc Ear Cuff Pro",
+    "유픽의 시그니처 모델로, 귀를 막지 않는 오픈이어 구조와 프리미엄 메탈 감성 디자인을 결합한 하이엔드 블루투스 귀찌 이어폰입니다. 장시간 착용에도 부담을 줄이고 AI 음성 사용, 통화, 음악 감상 환경까지 고려한 플래그십 라인입니다.",
+    "Open-Ear · Bluetooth · AI Voice",
+  ],
+  [
+    "UPIc Daily Fit",
+    "일상 착용 최적화 라인으로 가벼운 무게와 안정적인 착용감을 중심으로 설계되었습니다. 출근, 운동, 업무 통화, 산책 등 다양한 라이프스타일 환경에서 자연스럽게 사용할 수 있도록 밸런스를 맞춘 모델입니다.",
+    "Lightweight · Clear Call · Comfort",
+  ],
+  [
+    "UPIc Business Package",
+    "기업 판촉, 프리미엄 사은품, 리테일 유통 및 글로벌 납품을 위한 B2B 전용 패키지 구성입니다. 브랜드 로고 커스터마이징, 대량 공급, 파트너십 협업 등 실전 비즈니스 환경에 맞춘 공급 구조를 지원합니다.",
+    "B2B · Wholesale · Partnership",
+  ],
+];
+
+
+const strengths = [
+  ["01", "귀를 막지 않는 편안함", "커널형 이어폰의 답답함을 줄이고 주변 소리를 자연스럽게 인지할 수 있는 오픈형 구조입니다."],
+  ["02", "액세서리 같은 디자인", "기능성 기기처럼 보이지 않고 귀찌처럼 세련되게 착용할 수 있는 프리미엄 실루엣을 지향합니다."],
+  ["03", "AI 100개국어 번역", "해외 여행, 글로벌 비즈니스, 외국인 대화 환경에서 다양한 언어를 보다 자연스럽게 사용할 수 있도록 AI 번역 기능을 강조합니다."],
+  ["04", "실전 판매를 위한 구성", "상품 소개, 납품 상담, 구매 문의까지 바로 연결되는 실전형 브랜드 페이지 구조입니다."],
+];
+
+
+const reviews = [
+  ["김민준", "기존 이어폰보다 훨씬 편하고 오래 착용해도 귀가 덜 아픕니다."],
+  ["박서연", "귀찌처럼 보여서 디자인 만족도가 상당히 높았습니다."],
+  ["이도윤", "업무 통화용으로 사용 중인데 주변 소리도 같이 들려서 편합니다."],
+];
+
+
+const specs = [
+  ["Product Type", "Bluetooth Ear Cuff"],
+  ["Connection", "Bluetooth 5.4 Class"],
+  ["Core Use", "Call · Music · AI Voice"],
+  ["Business", "Retail · B2B · Wholesale"],
+];
+
+
+/** UI 문자열 (JSX에서 import) */
+const ui = {
+  purchaseInquiry: "구매문의",
+  brandFilmBadge: "UPIc Brand Film",
+  brandFilmPlaceholder:
+    "실제 제품 사용 영상 · 공항 번역 시연 · 해외 비즈니스 대화 영상을 업로드하세요",
+  heroOverlayTitle1: "AI 번역과 오디오를",
+  heroOverlayTitle2: "하나로 연결하다",
+  heroOverlayDesc:
+    "실시간 AI 번역, 오픈이어 착용감, 글로벌 커뮤니케이션 장면을 중심으로 브랜드 필름을 구성하면 실제 제품 신뢰도가 크게 올라갑니다.",
+  heroBadge: "AI Translation · Premium Bluetooth Ear Cuff Brand",
+  heroH1a: "언어의 장벽을 줄이는",
+  heroH1b: "AI 커뮤니케이션 디바이스",
+  heroLead:
+    "유픽(UPIc)은 AI 실시간 번역 기술과 오픈이어 웨어러블 디자인을 결합한 스마트 커뮤니케이션 브랜드입니다. 단순 음악 감상이 아니라 해외 여행, 글로벌 비즈니스, 외국인 응대, AI 음성 사용까지 고려한 차세대 이어웨어 경험을 제안합니다.",
+  ctaAi: "AI 기능 살펴보기",
+  ctaTrial: "사전 체험 문의",
+  deviceCaption: "Open-Ear · AI Translation",
+  companyEyebrow: "ABOUT UPIC",
+  companyTitle: "미래형 AI 웨어러블 경험을 설계합니다",
+  companyDesc:
+    "유픽은 단순한 이어폰 브랜드가 아닙니다. AI 번역 기술, 웨어러블 오디오, 글로벌 커뮤니케이션 경험을 결합해 새로운 형태의 스마트 디바이스 경험을 설계합니다.",
+  productsEyebrow: "PRODUCTS",
+  productsTitle: "상품소개",
+  productsDesc:
+    "실사용 중심 설계부터 글로벌 B2B 납품까지, 유픽은 AI 웨어러블 시장에 맞춘 현실적인 제품 라인업을 제안합니다.",
+  techEyebrow: "TECHNOLOGY",
+  techTitle: "UPIc만의 기술 포인트",
+  techDesc:
+    "실제 글로벌 사용 환경에서 필요한 AI 번역 속도, 착용 안정성, 음성 전달력, 장시간 사용 경험까지 동시에 고려한 스마트 웨어러블 구조를 목표로 합니다.",
+  techCardTitles: ["AI 100개국어 번역", "Open Ear Fit", "Premium Sound"],
+  techCardBody:
+    "사용자가 실제로 체감할 수 있는 편안함과 실용성을 중심으로 설계한 유픽의 핵심 기술 포인트입니다.",
+  specEyebrow: "PRODUCT SPEC",
+  specTitle: "고객이 이해하기 쉬운 명확한 제품 메시지",
+  reviewsEyebrow: "CUSTOMER REVIEW",
+  reviewsTitle: "실사용 후기",
+  reviewsDesc:
+    "실제 사용자들이 경험한 착용감, 통화 품질, 오픈이어 편안함, AI 사용 경험을 기반으로 한 리뷰입니다.",
+  locationEyebrow: "LOCATION",
+  locationTitle: "오시는길",
+  locationLead:
+    "유픽(UPIc) 쇼룸에서는 실제 제품 착용, AI 번역 기능 체험, 글로벌 커뮤니케이션 시연, 기업 납품 상담까지 직접 경험할 수 있습니다.",
+  addressLabel: "주소",
+  addressValue: "서울특별시 ○○구 ○○로 00",
+  hoursLabel: "운영시간",
+  hoursValue: "평일 10:00 - 18:00",
+  contactLabel: "문의",
+  contactValue: "contact@upic.co.kr",
+  mapTitle: "UPIc Showroom",
+  mapHint: "지도 영역 / 네이버지도 또는 카카오맵 삽입 가능",
+  contactEyebrow: "CONTACT",
+  contactTitle: "UPIc AI Experience",
+  contactLead:
+    "제품 체험, 사전 예약, 기업 납품, 글로벌 유통 및 AI 웨어러블 파트너십까지 실전 비즈니스 환경에 맞춘 상담을 지원합니다.",
+  kakaoCta1: "AI 번역 이어폰 체험 문의",
+  kakaoCta2: "상품 다시 보기",
+  kakaoFab: "카카오 실시간 상담",
+};
+
+
+/** 브랜드 필름 영상 경로 (preview.html·Vite 공통) */
+const BRAND_VIDEO_SRC = "video/__Seedance_20_04908.mp4";
+
+
+
+function App() {
+  const sectionTitle = (eyebrow, title, desc) => (
+    <div style={{ maxWidth: 760, marginBottom: 42 }}>
+      <p style={{ color: "#d6b56d", letterSpacing: 4, fontSize: 13, fontWeight: 900, marginBottom: 14 }}>{eyebrow}</p>
+      <h2 style={{ fontSize: "clamp(36px, 5vw, 64px)", lineHeight: 1.08, letterSpacing: "-0.055em", margin: 0, color: "#fff" }}>{title}</h2>
+      <p style={{ marginTop: 20, color: "rgba(255,255,255,.58)", fontSize: 18, lineHeight: 1.75 }}>{desc}</p>
+    </div>
+  );
+
+  const cardStyle = {
+    border: "1px solid rgba(255,255,255,.1)",
+    background: "rgba(255,255,255,.052)",
+    borderRadius: 34,
+    padding: 30,
+  };
+
+  return (
+    <main style={{ minHeight: "100vh", background: "#07080b", color: "white", fontFamily: "Arial, sans-serif", overflow: "hidden" }}>
+      <section id="home" style={{ position: "relative", minHeight: "100vh", padding: "28px 6vw 80px" }}>
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 74% 16%, rgba(214,181,109,.28), transparent 34%), radial-gradient(circle at 16% 78%, rgba(72,91,160,.2), transparent 32%), linear-gradient(180deg,#090a0f,#07080b)" }} />
+        <div style={{ position: "relative", zIndex: 1, maxWidth: 1280, margin: "0 auto" }}>
+          <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 20, position: "sticky", top: 0, zIndex: 10, padding: "12px 0", backdropFilter: "blur(18px)", flexWrap: "wrap" }}>
+            <a href="#home" style={{ display: "flex", alignItems: "center", gap: 12, color: "white", textDecoration: "none" }}>
+              <div style={{ width: 44, height: 44, borderRadius: 18, background: "linear-gradient(135deg,#f2d488,#7d622f)", display: "grid", placeItems: "center", color: "#08090c", fontWeight: 900 }}>U</div>
+              <div>
+                <div style={{ fontSize: 22, fontWeight: 900, letterSpacing: 1 }}>UPIc</div>
+                <div style={{ fontSize: 12, color: "rgba(255,255,255,.45)", letterSpacing: 1.2 }}>Premium Ear Cuff Audio</div>
+              </div>
+            </a>
+            <nav style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", justifyContent: "flex-end" }}>
+              {menuItems.map(([href, label]) => (
+                <a key={href} href={`#${href}`} style={{ color: "rgba(255,255,255,.72)", textDecoration: "none", padding: "10px 14px", borderRadius: 999, fontSize: 14, border: "1px solid rgba(255,255,255,.08)", background: "rgba(255,255,255,.035)" }}>{label}</a>
+              ))}
+              <a href="#contact" style={{ color: "#08090c", background: "#f0d082", padding: "11px 18px", borderRadius: 999, textDecoration: "none", fontWeight: 900, fontSize: 14 }}>{ui.purchaseInquiry}</a>
+            </nav>
+          </header>
+
+          <div
+            style={{
+              marginTop: 34,
+              marginBottom: 46,
+              marginLeft: "calc(50% - 50vw)",
+              marginRight: "calc(50% - 50vw)",
+              width: "100vw",
+              maxWidth: "100vw",
+              overflow: "hidden",
+              position: "relative",
+              background: "#0a0b10",
+              boxShadow: "0 40px 120px rgba(0,0,0,.5)",
+            }}
+          >
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                height: "clamp(300px, 56vw, 720px)",
+                minHeight: "min(52vh, 720px)",
+              }}
+            >
+              <video
+                src={BRAND_VIDEO_SRC}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                aria-label={ui.brandFilmBadge}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                }}
+              />
+              <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.32)", pointerEvents: "none" }} />
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.45) 55%, rgba(7,8,11,0.82) 100%)",
+                  pointerEvents: "none",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(105deg, rgba(7,8,11,0.75) 0%, rgba(7,8,11,0.25) 42%, transparent 68%)",
+                  pointerEvents: "none",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "radial-gradient(ellipse 80% 60% at 78% 18%, rgba(214,181,109,0.14), transparent 55%)",
+                  pointerEvents: "none",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  top: "clamp(16px, 4vw, 28px)",
+                  left: "clamp(16px, 5vw, 48px)",
+                  zIndex: 3,
+                  padding: "10px 18px",
+                  borderRadius: 999,
+                  background: "rgba(0,0,0,0.5)",
+                  backdropFilter: "blur(12px)",
+                  border: "1px solid rgba(240,208,130,0.22)",
+                  color: "white",
+                  fontSize: "clamp(11px, 2.5vw, 13px)",
+                  fontWeight: 800,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {ui.brandFilmBadge}
+              </div>
+              <div
+                style={{
+                  position: "absolute",
+                  left: "clamp(20px, 6vw, 80px)",
+                  right: "clamp(20px, 6vw, 48px)",
+                  bottom: "clamp(28px, 8vw, 72px)",
+                  zIndex: 2,
+                  maxWidth: 720,
+                }}
+              >
+                <h2
+                  style={{
+                    fontSize: "clamp(28px, 5.5vw, 72px)",
+                    lineHeight: 1.05,
+                    letterSpacing: "-0.06em",
+                    margin: 0,
+                    color: "white",
+                    textShadow: "0 4px 48px rgba(0,0,0,0.55)",
+                  }}
+                >
+                  {ui.heroOverlayTitle1}
+                  <span style={{ display: "block", color: "#f0d082", marginTop: "0.08em" }}>
+                    {ui.heroOverlayTitle2}
+                  </span>
+                </h2>
+                <p
+                  style={{
+                    marginTop: "clamp(14px, 2.5vw, 20px)",
+                    color: "rgba(255,255,255,0.78)",
+                    lineHeight: 1.75,
+                    fontSize: "clamp(15px, 2.2vw, 18px)",
+                    maxWidth: 560,
+                    textShadow: "0 2px 24px rgba(0,0,0,0.45)",
+                  }}
+                >
+                  {ui.heroOverlayDesc}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", alignItems: "center", gap: 64, minHeight: "72vh", paddingTop: 20 }}>
+            <div>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, border: "1px solid rgba(255,255,255,.1)", background: "rgba(255,255,255,.055)", padding: "10px 16px", borderRadius: 999, color: "rgba(255,255,255,.74)", marginBottom: 28 }}><span style={{ color: "#f0d082" }}>&#9670;</span> {ui.heroBadge}</div>
+              <h1 style={{ fontSize: "clamp(48px, 7.4vw, 104px)", lineHeight: 1.02, letterSpacing: "-0.075em", margin: 0, fontWeight: 900 }}>{ui.heroH1a}<span style={{ display: "block", color: "#f0d082" }}>{ui.heroH1b}</span></h1>
+              <p style={{ marginTop: 28, maxWidth: 680, fontSize: 20, lineHeight: 1.78, color: "rgba(255,255,255,.64)" }}>{ui.heroLead}</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginTop: 38 }}>
+                <a href="#products" style={{ background: "#f0d082", color: "#07080b", padding: "17px 30px", borderRadius: 999, textDecoration: "none", fontWeight: 900 }}>{ui.ctaAi}</a>
+                <a href="#contact" style={{ border: "1px solid rgba(255,255,255,.16)", background: "rgba(255,255,255,.06)", color: "white", padding: "17px 30px", borderRadius: 999, textDecoration: "none", fontWeight: 800 }}>{ui.ctaTrial}</a>
+              </div>
+            </div>
+            <div style={{ position: "relative" }}>
+              <div style={{ position: "relative", border: "1px solid rgba(255,255,255,.11)", background: "rgba(255,255,255,.055)", padding: 30, borderRadius: 52, boxShadow: "0 34px 120px rgba(0,0,0,.38)" }}>
+                <div style={{ aspectRatio: "4 / 5", borderRadius: 42, background: "radial-gradient(circle at 50% 23%, rgba(255,255,255,.36), transparent 22%), linear-gradient(150deg,#181b25,#08090c)", position: "relative", overflow: "hidden" }}>
+                  <div style={{ position: "absolute", left: "50%", top: "50%", width: 185, height: 310, transform: "translate(-50%,-50%)", borderRadius: 999, border: "18px solid #d9c188" }} />
+                  <div style={{ position: "absolute", left: "47%", top: "35%", width: 86, height: 158, borderRadius: 34, background: "linear-gradient(#f7e6ad,#9d7c38)" }} />
+                  <div style={{ position: "absolute", left: "55%", top: "45%", width: 72, height: 72, borderRadius: 999, background: "#11131a", boxShadow: "0 0 0 9px #cda85d" }} />
+                  <div style={{ position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)", border: "1px solid rgba(255,255,255,.12)", background: "rgba(0,0,0,.34)", padding: "12px 20px", borderRadius: 999, color: "rgba(255,255,255,.76)", whiteSpace: "nowrap" }}>{ui.deviceCaption}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="company" style={{ padding: "100px 6vw" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+          {sectionTitle(ui.companyEyebrow, ui.companyTitle, ui.companyDesc)}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 18 }}>
+            {strengths.map(([num, title, text]) => <div key={title} style={cardStyle}><div style={{ color: "#f0d082", fontSize: 14, fontWeight: 900, marginBottom: 28 }}>{num}</div><h3 style={{ fontSize: 23, margin: "0 0 14px", letterSpacing: "-0.03em" }}>{title}</h3><p style={{ color: "rgba(255,255,255,.58)", lineHeight: 1.75, margin: 0 }}>{text}</p></div>)}
+          </div>
+        </div>
+      </section>
+
+      <section id="products" style={{ padding: "100px 6vw", background: "linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.045))" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+          {sectionTitle(ui.productsEyebrow, ui.productsTitle, ui.productsDesc)}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 22 }}>
+            {productCards.map(([title, text, tag]) => (
+              <article key={title} style={{ borderRadius: 38, overflow: "hidden", border: "1px solid rgba(255,255,255,.1)", background: "rgba(7,8,11,.88)", boxShadow: "0 24px 80px rgba(0,0,0,.25)" }}>
+                <div style={{ height: 230, background: "radial-gradient(circle at 55% 30%, rgba(240,208,130,.38), transparent 26%), linear-gradient(145deg,#191c26,#0a0b10)", position: "relative" }}>
+                  <div style={{ position: "absolute", left: "50%", top: "50%", width: 120, height: 190, transform: "translate(-50%,-50%)", border: "13px solid #d9c188", borderRadius: 999 }} />
+                  <div style={{ position: "absolute", left: "54%", top: "43%", width: 48, height: 82, borderRadius: 22, background: "linear-gradient(#f7e6ad,#9d7c38)" }} />
+                </div>
+                <div style={{ padding: 28 }}><p style={{ color: "#f0d082", fontSize: 13, fontWeight: 900, letterSpacing: 1.2 }}>{tag}</p><h3 style={{ fontSize: 26, margin: "12px 0", letterSpacing: "-0.04em" }}>{title}</h3><p style={{ color: "rgba(255,255,255,.58)", lineHeight: 1.72 }}>{text}</p></div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="technology" style={{ padding: "100px 6vw" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+          {sectionTitle(ui.techEyebrow, ui.techTitle, ui.techDesc)}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 20 }}>
+            {ui.techCardTitles.map((title) => <div key={title} style={cardStyle}><h3 style={{ fontSize: 28, marginBottom: 16 }}>{title}</h3><p style={{ color: "rgba(255,255,255,.58)", lineHeight: 1.8 }}>{ui.techCardBody}</p></div>)}
+          </div>
+        </div>
+      </section>
+
+      <section id="specs" style={{ padding: "100px 6vw" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", border: "1px solid rgba(255,255,255,.1)", background: "rgba(255,255,255,.04)", borderRadius: 44, padding: "44px clamp(28px,4vw,54px)" }}>
+          <p style={{ color: "#f0d082", letterSpacing: 4, fontSize: 13, fontWeight: 900 }}>{ui.specEyebrow}</p>
+          <h2 style={{ fontSize: "clamp(34px,4.6vw,58px)", letterSpacing: "-0.055em", margin: "12px 0 0" }}>{ui.specTitle}</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))", gap: 14, marginTop: 34 }}>
+            {specs.map(([label, value]) => <div key={label} style={{ border: "1px solid rgba(255,255,255,.1)", background: "rgba(0,0,0,.22)", borderRadius: 28, padding: 24 }}><p style={{ color: "rgba(255,255,255,.42)", margin: "0 0 12px" }}>{label}</p><p style={{ fontSize: 19, fontWeight: 900, margin: 0 }}>{value}</p></div>)}
+          </div>
+        </div>
+      </section>
+
+      <section id="reviews" style={{ padding: "100px 6vw" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+          {sectionTitle(ui.reviewsEyebrow, ui.reviewsTitle, ui.reviewsDesc)}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 18 }}>
+            {reviews.map(([name, text]) => <div key={name} style={cardStyle}><div style={{ color: "#f0d082", fontWeight: 900, marginBottom: 18 }}>{name}</div><p style={{ color: "rgba(255,255,255,.62)", lineHeight: 1.8, margin: 0 }}>{text}</p></div>)}
+          </div>
+        </div>
+      </section>
+
+      <section id="location" style={{ padding: "100px 6vw" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24 }}>
+          <div style={{ borderRadius: 44, padding: 44, background: "linear-gradient(135deg,#f0d082,#8c6a30)", color: "#07080b" }}>
+            <p style={{ letterSpacing: 4, fontSize: 13, fontWeight: 900, marginBottom: 14 }}>{ui.locationEyebrow}</p>
+            <h2 style={{ fontSize: "clamp(36px,5vw,62px)", lineHeight: 1.08, letterSpacing: "-0.06em", margin: 0 }}>{ui.locationTitle}</h2>
+            <p style={{ marginTop: 22, fontSize: 18, lineHeight: 1.75, color: "rgba(0,0,0,.68)" }}>{ui.locationLead}</p>
+            <div style={{ marginTop: 34, display: "grid", gap: 12 }}>
+              <div><b>{ui.addressLabel}</b> {ui.addressValue}</div>
+              <div><b>{ui.hoursLabel}</b> {ui.hoursValue}</div>
+              <div><b>{ui.contactLabel}</b> {ui.contactValue}</div>
+            </div>
+          </div>
+          <div style={{ minHeight: 420, borderRadius: 44, border: "1px solid rgba(255,255,255,.1)", background: "linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.025))", display: "grid", placeItems: "center", textAlign: "center", padding: 30 }}><div><h3 style={{ fontSize: 28, margin: 0 }}>{ui.mapTitle}</h3><p style={{ color: "rgba(255,255,255,.55)", marginTop: 10 }}>{ui.mapHint}</p></div></div>
+        </div>
+      </section>
+
+      <section id="contact" style={{ padding: "80px 6vw 120px" }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto", background: "white", color: "#07080b", borderRadius: 52, padding: "58px 42px", textAlign: "center" }}>
+          <p style={{ color: "#8c6a30", letterSpacing: 4, fontSize: 13, fontWeight: 900, marginBottom: 16 }}>{ui.contactEyebrow}</p>
+          <h2 style={{ fontSize: "clamp(38px,5vw,66px)", letterSpacing: "-0.06em", margin: 0 }}>{ui.contactTitle}</h2>
+          <p style={{ maxWidth: 700, margin: "24px auto 0", color: "rgba(0,0,0,.62)", lineHeight: 1.8, fontSize: 18 }}>{ui.contactLead}</p>
+          <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: 14, marginTop: 36 }}>
+            <a href="https://open.kakao.com/o/gfXpUJti" target="_blank" rel="noreferrer" style={{ background: "#07080b", color: "white", padding: "17px 32px", borderRadius: 999, textDecoration: "none", fontWeight: 900 }}>{ui.kakaoCta1}</a>
+            <a href="#products" style={{ border: "1px solid rgba(0,0,0,.15)", color: "#07080b", padding: "17px 32px", borderRadius: 999, textDecoration: "none", fontWeight: 900 }}>{ui.kakaoCta2}</a>
+          </div>
+        </div>
+      </section>
+      <a href="https://open.kakao.com/o/gfXpUJti" target="_blank" rel="noreferrer" style={{ position: "fixed", right: 24, bottom: 24, zIndex: 50, background: "#FEE500", color: "#111", textDecoration: "none", fontWeight: 900, padding: "16px 22px", borderRadius: 999, boxShadow: "0 20px 60px rgba(0,0,0,.35)", display: "flex", alignItems: "center", gap: 10 }}>
+        <span style={{ width: 12, height: 12, borderRadius: 999, background: "#111" }} />
+        {ui.kakaoFab}
+      </a>
+    </main>
+  );
+}
+
+
+const __root = ReactDOM.createRoot(document.getElementById("root"));
+__root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+  </script>
+</body>
+</html>
